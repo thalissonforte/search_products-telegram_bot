@@ -90,3 +90,6 @@ target/
 
 # Credential Google Drive Bot
 credentials.json
+
+# Base dados
+base.csv

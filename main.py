@@ -4,7 +4,7 @@ from src.driveBot import DriveBot
 bot = TelegramBot()
 bot.Start()
 
-#bot.teste()
+#print(bot.teste())
 
 #drive_bot = DriveBot()
 #print(drive_bot.getData(True))

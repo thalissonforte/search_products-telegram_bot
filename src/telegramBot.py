@@ -7,15 +7,18 @@ from collections import OrderedDict
 
 load_dotenv()
 
-texto_cumprimentos = ['OI', 'OIE', 'OLA', 'EAI', 'OPA', 'TUDO BEM?', 'COMO VAI?', '/START', 'FALA', 'SALVE']
+texto_cumprimentos = ['OI', 'OIE', 'OLA', 'EAI', 'EAE', 'OPA', 'TUDO BEM?', 'COMO VAI?', '/START', 'FALA', 'SALVE']
+texto_paradinhas   = ['PARADA', 'PARADAS', 'PARADINHAS', 'PARADINHA', 'BOMBA', 'VENENO']
 
 categorias_fixas = ['WHEY PROTEIN', 'CREATINA', 'PRÉ TREINO', 'ALBUMINA', 'VITAMINA', 'HIPERCALÓRICO', 
-                    'TERMOGÊNICO', 'CAFEÍNA', 'GLUTAMINA']
+                    'TERMOGÊNICO', 'CAFEÍNA', 'GLUTAMINA', 'BARRA DE PROTEÍNA', 'COLÁGENO', 'GLUTAMINA',
+                    'BCAA', 'HIPERPROTÉICO', 'CAMISETA', 'COQUETELEIRA', 'MULTIVITAMÍNICO', 'L-CARTININA',
+                    'MALTODEXTRINA', 'ÔMEGA 3', 'TERMOGÊNICO', 'PASTA DE AMENDOIM']
 
 marcas_prioritarias = ['INTEGRAL MÉDICA', 'MAX TITANIUM', 'PROBIÓTICA', 'DARKNESS', 'BLACK SKULL', 
                         'NUTRATA', 'DUX NUTRITION', 'ATHLETICA NUTRITION', 'NATUROVOS']
 
-nLimitProducts = 7
+nLimitProducts = 10
 class TelegramBot:
     def __init__(self):
         TOKEN = os.getenv("API_KEY")
@@ -67,10 +70,21 @@ class TelegramBot:
 
         if any(msg in texto_cumprimentos for msg in text_splitted):
             return "Eai meu rei, com o que posso te ajudar?"
+        elif any(msg in texto_paradinhas for msg in text_splitted):
+            return "\U0001F608	\U0001F608	\U0001F489 \U0001F489 "
+        #elif message == '1':
+            #aux = self.ConfigureResposta(self.produtosTemporarios, offset=nLimitProducts, bViewAll=True)
+            #print(aux)
+            #return aux
         else:
-            produtos = self.ProcessMessage(message)
-            if (produtos != -1):
-                return self.ConfigureResposta(produtos)
+            self.produtosTemporarios = None
+            self.produtosTemporarios = self.ProcessMessage(message)
+            if (self.produtosTemporarios != -1):
+                bRemainProducts = False
+                if len(self.produtosTemporarios) > nLimitProducts:
+                    bRemainProducts = True
+
+                return self.ConfigureResposta(self.produtosTemporarios, bRemainProducts=bRemainProducts)
             else:
                 return 'Não consegui achar nenhum produto aqui, me manda mais informações.'
 
@@ -126,14 +140,17 @@ class TelegramBot:
                     items_encontrados[id] = [count, row]
         #else: FAZER PIOR CASO, SEM CATEGORIA E SEM MARCA
 
-        items_encontrados_ordenados = dict()
-        for item in sorted(items_encontrados, key = items_encontrados.get, reverse=True):
-            items_encontrados_ordenados[item] = items_encontrados[item]
+        bOrdenarItems = len(text_splitted) > 1
+        if bOrdenarItems:
+            items_encontrados_ordenados = dict()
+            for item in sorted(items_encontrados, key = items_encontrados.get, reverse=True):
+                items_encontrados_ordenados[item] = items_encontrados[item]
 
-        if len(items_encontrados_ordenados) > 0:
-            return items_encontrados_ordenados
+            if len(items_encontrados_ordenados) > 0:
+                return items_encontrados_ordenados
         else:
-            return -1
+            return items_encontrados 
+        return -1
 
     # PROCESSA MENSAGEM
     def ProcessMessage(self, msg):
@@ -154,32 +171,37 @@ class TelegramBot:
         marca = self.FindMarca(text_splitted)
         produtos = -1
         if categoria != -1:
-            #print(categoria)
+            print(categoria)
             df_especifico = self.dictCategoriesDF[categoria]
             if marca != -1:
-                #print(marca)
+                print(marca)
                 df_especifico = df_especifico[df_especifico['MARCAS'].str.contains(marca)]
                 produtos = self.FindProduto(text_splitted, df_especifico, bHasCategoria=True, bHasMarca=True)
             else:
                produtos = self.FindProduto(text_splitted, df_especifico, bHasCategoria=True) 
         #else: O PIOR CASO QUANDO NAO TEM CATEGORIA TO-DO
-
         return produtos
 
     # CONFIGURAR RESPOSTA
-    def ConfigureResposta(self, produtos):
-        #print(len(produtos))        
+    def ConfigureResposta(self, produtos, offset = 0, bRemainProducts = False, bViewAll=False):       
         productsAdded = 0
         resp = f'\U000026A1	Achei alguns produtos: \U000026A1\n' 
-        
+        print(f'Visualizar todos = {bViewAll}')
+        nOffsetUsed = 0
         for prod in produtos.values():
+            #if nOffsetUsed < offset:
+                #nOffsetUsed = nOffsetUsed + 1
+                #pass
+
             nome = (prod[1])[1]
             marca = (prod[1])[2]
             custo = (prod[1])[4]
             estoque = (prod[1])[5]
-
+            
+            
             if int(estoque) < 1:
-                resp = f'{resp}\n\U0000274C <s>{nome}: {marca}</s> \n\U0000274C <s>Sem estoque</s>\n'
+                if (not bViewAll): # SE FOR PARA VISUALIZAR TODOS, MOSTRAR SOMENTE OS QUE TEM ESTOQUE
+                    resp = f'{resp}\n\U0000274C <s>{nome}: {marca}</s> \n\U0000274C <s>Sem estoque</s>\n'
             else:
                 dCusto = float(custo.replace('R$ ','').replace(',','.'))
                 dVenda = round(dCusto * 1.25, 2)
@@ -187,10 +209,14 @@ class TelegramBot:
 
             productsAdded = productsAdded + 1
 
-            if productsAdded >= nLimitProducts:
+            if (not bViewAll) and (productsAdded >= nLimitProducts):
                 break
         
         if productsAdded > 0:
+            if bRemainProducts:
+                resp = f'{resp}\n\U0001F9D0	Não achou o que queria? \n\U0001F4A1	Manda <b>mais informações juntas</b> que eu posso te ajudar...'
+            else:
+                resp = f'{resp}\n\U0001F9D0	Isso foi tudo o que encontrei! \n\U0001F4A1	Manda <b>mais informações juntas</b> caso não tenha encontrado o que queria...'
             return resp
         else:
             return 'Nada encontrado.'
@@ -201,5 +227,6 @@ class TelegramBot:
         self.dictCategoriesDF = dict()
         self.CreateCategories(self.df) 
 
-        print(self.CreateAnswer('eai'))
-        print(self.CreateAnswer(f'creatina'))
+        #print(self.CreateAnswer('eai'))
+        self.CreateAnswer(f'whey')
+        self.CreateAnswer(f'1')

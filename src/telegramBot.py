@@ -18,11 +18,13 @@ categorias_fixas = ['WHEY PROTEIN', 'CREATINA', 'PRÉ TREINO', 'ALBUMINA', 'VITA
 marcas_prioritarias = ['INTEGRAL MÉDICA', 'MAX TITANIUM', 'PROBIÓTICA', 'DARKNESS', 'BLACK SKULL', 
                         'NUTRATA', 'DUX NUTRITION', 'ATHLETICA NUTRITION', 'NATUROVOS']
 
+comando_forcar_carregamento = ['/ATUALIZARPLANILHA']
+
 nLimitProducts = 10
 class TelegramBot:
     def __init__(self):
-        TOKEN = os.getenv("API_KEY")
-        self.WHITELIST = os.getenv("USERS_ID").split(':')
+        TOKEN = os.environ["API_KEY"]
+        self.WHITELIST = str(os.environ["USERS_ID"]).split(':')
         print(self.WHITELIST)
         self.url = f'https://api.telegram.org/bot{TOKEN}/'
         self.driveBot = DriveBot()
@@ -30,7 +32,7 @@ class TelegramBot:
     def Start(self):
         update_id = None
         # INICIAR DRIVE BOT (AQUI VERIFICAR SE PRECISA FORÇAR ATUALIZACAO)
-        self.df = self.driveBot.getData(bForceAndSave=True)
+        self.df = self.driveBot.getData()
         self.dictCategoriesDF = dict()
         self.CreateCategories(self.df) 
 
@@ -68,6 +70,9 @@ class TelegramBot:
         elif len(text_splitted) < 1:
             return 'Bloqueio de proteção: Falta de informações.' 
 
+        if (message in comando_forcar_carregamento):
+            self.driveBot.getData(bForceAndSave=True)
+            return "Planilha atualizada com sucesso!"
         if any(msg in texto_cumprimentos for msg in text_splitted):
             return "Eai meu rei, com o que posso te ajudar?"
         elif any(msg in texto_paradinhas for msg in text_splitted):
@@ -228,5 +233,7 @@ class TelegramBot:
         self.CreateCategories(self.df) 
 
         #print(self.CreateAnswer('eai'))
-        self.CreateAnswer(f'whey')
-        self.CreateAnswer(f'1')
+        #self.CreateAnswer(f'whey')
+        #self.CreateAnswer(f'1')
+        #print(self.CreateAnswer(f'/atualizarplanilha'))
+        #print(self.CreateAnswer(f'whey'))

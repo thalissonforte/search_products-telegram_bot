@@ -3,12 +3,13 @@ import gspread
 import json
 import os
 import pandas as pd
+import boto
 load_dotenv()
 
 class DriveBot:
     def __init__(self):
-        self.SHEET_URL_KEY = os.getenv('SHEET_URL_KEY')
-        self.gc = gspread.service_account(filename='credentials.json')
+        self.SHEET_URL_KEY = os.environ['SHEET_URL_KEY']
+        self.gc = gspread.service_account_from_dict(json.loads(os.environ['GOOGLE_CREDENTIALS']))
 
     def getData(self, bOnlyIfEstoque = False, bForceAndSave = False):
         # BASE OBTIDA A PARTIR DE ARQUIVO OU REQUISICAO

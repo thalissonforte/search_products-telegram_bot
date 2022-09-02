@@ -30,7 +30,7 @@ class TelegramBot:
     def Start(self):
         update_id = None
         # INICIAR DRIVE BOT (AQUI VERIFICAR SE PRECISA FORÇAR ATUALIZACAO)
-        self.df = self.driveBot.getData()
+        self.df = self.driveBot.getData(bForceAndSave=True)
         self.dictCategoriesDF = dict()
         self.CreateCategories(self.df) 
 
@@ -51,7 +51,7 @@ class TelegramBot:
                             self.SendAnswer(chat_id, answer_bot, parse_mode='HTML')
                         else:
                             answer_bot   = 'Você não possui permissões para fazer requisições.'
-                            #self.SendAnswer(chat_id, answer_bot, parse_mode='HTML')
+                            self.SendAnswer(chat_id, answer_bot, parse_mode='HTML')
                         #print(answer_bot)
                     except:
                         pass

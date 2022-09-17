@@ -53,7 +53,8 @@ class TelegramBot:
                             self.SendAnswer(chat_id, answer_bot, parse_mode='HTML')
                         else:
                             answer_bot   = 'Você não possui permissões para fazer requisições.'
-                            self.SendAnswer(chat_id, answer_bot, parse_mode='HTML')
+                            #self.SendAnswer(chat_id, answer_bot, parse_mode='HTML')
+                            pass
                         #print(answer_bot)
                     except:
                         pass

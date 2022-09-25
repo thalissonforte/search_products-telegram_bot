@@ -18,7 +18,7 @@ categorias_fixas = ['WHEY PROTEIN', 'CREATINA', 'PRÉ TREINO', 'ALBUMINA', 'VITA
                     'MALTODEXTRINA', 'ÔMEGA 3', 'TERMOGÊNICO', 'PASTA DE AMENDOIM']
 
 marcas_prioritarias = ['INTEGRAL MÉDICA', 'MAX TITANIUM', 'PROBIÓTICA', 'DARKNESS', 'BLACK SKULL', 
-                        'NUTRATA', 'DUX NUTRITION', 'ATHLETICA NUTRITION', 'NATUROVOS', 'HEALTHTIME', 
+                        'NUTRATA', 'DUX NUTRITION', 'ATHLETICA NUTRITION', 'NATUROVOS', 'HEALTH TIME', 
                         '3VS', 'BODY ACTION', 'FTW SPORTS']
 
 comando_forcar_carregamento = ['/ATUALIZARPLANILHA']

@@ -7,7 +7,9 @@ from collections import OrderedDict
 
 load_dotenv()
 
-texto_cumprimentos = ['OI', 'OIE', 'OLA', 'EAI', 'EAE', 'OPA', 'TUDO BEM?', 'COMO VAI?', '/START', 'FALA', 'SALVE']
+texto_cumprimentos = ['OI', 'OIE', 'OLA', 'EAI', 'EAE', 'OPA', 'TUDO BEM?', 'COMO VAI?', '/START', 'FALA', 'SALVE', 
+                      'BOM DIA', 'BOA TARDE', 'BOA NOITE']
+
 texto_paradinhas   = ['PARADA', 'PARADAS', 'PARADINHAS', 'PARADINHA', 'BOMBA', 'VENENO']
 
 categorias_fixas = ['WHEY PROTEIN', 'CREATINA', 'PRÉ TREINO', 'ALBUMINA', 'VITAMINA', 'HIPERCALÓRICO', 
@@ -16,7 +18,8 @@ categorias_fixas = ['WHEY PROTEIN', 'CREATINA', 'PRÉ TREINO', 'ALBUMINA', 'VITA
                     'MALTODEXTRINA', 'ÔMEGA 3', 'TERMOGÊNICO', 'PASTA DE AMENDOIM']
 
 marcas_prioritarias = ['INTEGRAL MÉDICA', 'MAX TITANIUM', 'PROBIÓTICA', 'DARKNESS', 'BLACK SKULL', 
-                        'NUTRATA', 'DUX NUTRITION', 'ATHLETICA NUTRITION', 'NATUROVOS']
+                        'NUTRATA', 'DUX NUTRITION', 'ATHLETICA NUTRITION', 'NATUROVOS', 'HEALTHTIME', 
+                        '3VS', 'BODY ACTION', 'FTW SPORTS']
 
 comando_forcar_carregamento = ['/ATUALIZARPLANILHA']
 

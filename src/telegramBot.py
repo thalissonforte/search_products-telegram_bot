@@ -10,7 +10,7 @@ load_dotenv()
 texto_cumprimentos = ['OI', 'OIE', 'OLA', 'EAI', 'EAE', 'OPA', 'TUDO BEM?', 'COMO VAI?', '/START', 'FALA', 'SALVE', 
                       'BOM DIA', 'BOA TARDE', 'BOA NOITE']
 
-texto_paradinhas   = ['PARADA', 'PARADAS', 'PARADINHAS', 'PARADINHA', 'BOMBA', 'VENENO']
+texto_emojis   = ['EMOJI']
 
 categorias_fixas = ['WHEY PROTEIN', 'CREATINA', 'PRÉ TREINO', 'ALBUMINA', 'VITAMINA', 'HIPERCALÓRICO', 
                     'TERMOGÊNICO', 'CAFEÍNA', 'GLUTAMINA', 'BARRA DE PROTEÍNA', 'COLÁGENO', 'GLUTAMINA',
@@ -56,15 +56,12 @@ class TelegramBot:
                             self.SendAnswer(chat_id, answer_bot, parse_mode='HTML')
                         else:
                             answer_bot   = 'Você não possui permissões para fazer requisições.'
-                            #self.SendAnswer(chat_id, answer_bot, parse_mode='HTML')
                             pass
-                        #print(answer_bot)
                     except:
                         pass
 
 
     def CreateAnswer(self, message):
-        #print("Recebi uma mensagem: " + message)
         message = message.upper()
         #TRATAMENTO DA MENSAGEM
         text_splitted = message.split(' ')
@@ -79,12 +76,8 @@ class TelegramBot:
             return "Planilha atualizada com sucesso!"
         if any(msg in texto_cumprimentos for msg in text_splitted):
             return "Eai meu rei, com o que posso te ajudar?"
-        elif any(msg in texto_paradinhas for msg in text_splitted):
+        elif any(msg in texto_emojis for msg in text_splitted):
             return "\U0001F608	\U0001F608	\U0001F489 \U0001F489 "
-        #elif message == '1':
-            #aux = self.ConfigureResposta(self.produtosTemporarios, offset=nLimitProducts, bViewAll=True)
-            #print(aux)
-            #return aux
         else:
             self.produtosTemporarios = None
             self.produtosTemporarios = self.ProcessMessage(message)
@@ -198,16 +191,11 @@ class TelegramBot:
         print(f'Visualizar todos = {bViewAll}')
         nOffsetUsed = 0
         for prod in produtos.values():
-            #if nOffsetUsed < offset:
-                #nOffsetUsed = nOffsetUsed + 1
-                #pass
-
             nome = (prod[1])[1]
             marca = (prod[1])[2]
             custo = (prod[1])[4]
             estoque = (prod[1])[5]
-            
-            
+                    
             if int(estoque) < 1:
                 if (not bViewAll): # SE FOR PARA VISUALIZAR TODOS, MOSTRAR SOMENTE OS QUE TEM ESTOQUE
                     resp = f'{resp}\n\U0000274C <s>{nome}: {marca}</s> \n\U0000274C <s>Sem estoque</s>\n'
@@ -235,9 +223,3 @@ class TelegramBot:
         self.df = self.driveBot.getData()
         self.dictCategoriesDF = dict()
         self.CreateCategories(self.df) 
-
-        #print(self.CreateAnswer('eai'))
-        #self.CreateAnswer(f'whey')
-        #self.CreateAnswer(f'1')
-        #print(self.CreateAnswer(f'/atualizarplanilha'))
-        #print(self.CreateAnswer(f'whey'))

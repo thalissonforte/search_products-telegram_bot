@@ -1,57 +1,29 @@
-search_products_telegramBot
+Telegram Bot para pesquisa de produtos no Google Sheets
 ==============================
 
-Bot do Telegram voltado para procura e exibição de informações a partir do Google Sheets.
+Ferramentas e conhecimentos utilizadas:
+- Python
+- API do Google Sheets 
+- API do Telegram
+- Busca e manipulação de dados
+-----------------------
+Pensando em um exemplo real: Se você já fez ou faz parte de um pequeno negócio que não possui seu próprio sistema, sabe o quão difícil é lidar com as enormes planilhas de distribuição de produtos que são atualizadas a todo momento. 🥱
 
-Project Organization
-------------
+O carregamento é demorado (mesmo tendo uma boa máquina) e seu maior aliado muitas vezes é o CTRL + F. 🔍
 
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+Se sua missão é apenas pesquisar por um determinado produto, coisa rápida, apenas para saber seu custo ou para descobrir quantas unidades existem, meu amigo... já vai reservando alguns bons minutos para fazer isso. E se estiver usando o celular... esquece!
 
+É claro que daqui um tempo, com o crescimento do seu negócio, um sistema para a realização dessa procura vai ser necessário. Mas o que dá para fazer para solucionar isso agora? Existe uma solução com o melhor custo-benefício pro momento atual do negócio? 🧐
 
---------
+E eu relutei muito para acreditar que essa seria a melhor resposta: um bot no Telegram. 🤖
 
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+Fui atrás de uma solução de baixa-média complexidade que pudesse ter uma utilização fácil, e logo pensei: o que poderia ser mais fácil que mandar uma mensagem para alguém usando um aplicativo? 💡
+
+Agregando alguns conhecimentos que já possuía sobre manipulação e busca de dados, aliado a utilização das APIs do Google Sheets e Telegram, enfim, desenvolvi em Python o (tão relutado) bot de pesquisa de produtos no Telegram. 🤖👉📦
+
+O que antes era praticamente inviável de ser feito pelo celular, hoje consigo realizar em menos de 15 segundos. 📲
+
+Um projeto simples que resolve uma dor de cabeça complexa, sem despender sequer alguma quantidade de recurso, apenas pela brincadeira de resolver as coisas. ✅
+
+Sigo evoluindo o projeto, e caso esteja pensando em implementar algo nesse sentido, me manda uma mensagem, vou ficar muito feliz em poder contribuir! 🤝
+

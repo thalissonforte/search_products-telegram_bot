@@ -1,12 +1,13 @@
 Telegram Bot para pesquisa de produtos no Google Sheets
 ==============================
 
-Ferramentas e conhecimentos utilizadas:
+#### Ferramentas e conhecimentos utilizadas
 - Python
 - API do Google Sheets 
 - API do Telegram
 - Busca e manipulação de dados
 -----------------------
+#### Contexto de desenvolvimento
 Pensando em um exemplo real: Se você já fez ou faz parte de um pequeno negócio que não possui seu próprio sistema, sabe o quão difícil é lidar com as enormes planilhas de distribuição de produtos que são atualizadas a todo momento. 🥱
 
 O carregamento é demorado (mesmo tendo uma boa máquina) e seu maior aliado muitas vezes é o CTRL + F. 🔍
@@ -27,6 +28,8 @@ Um projeto simples que resolve uma dor de cabeça complexa, sem despender sequer
 
 Sigo evoluindo o projeto, e caso esteja pensando em implementar algo nesse sentido, me manda uma mensagem, vou ficar muito feliz em poder contribuir! 🤝
 
+---------------
+### Resultado Final
 
 https://github.com/thalissonforte/search_products-telegram_bot/assets/48456093/f2cf71bc-db4c-421c-a87c-73c16b2633c6
 

@@ -27,4 +27,7 @@ Um projeto simples que resolve uma dor de cabeça complexa, sem despender sequer
 
 Sigo evoluindo o projeto, e caso esteja pensando em implementar algo nesse sentido, me manda uma mensagem, vou ficar muito feliz em poder contribuir! 🤝
 
-https://github.com/thalissonforte/search_products-telegram_bot/assets/48456093/ad5c848a-d5e2-4b73-8f8b-28fd8417c4ca
+
+https://github.com/thalissonforte/search_products-telegram_bot/assets/48456093/f2cf71bc-db4c-421c-a87c-73c16b2633c6
+
+
